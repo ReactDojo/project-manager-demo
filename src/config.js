@@ -48,12 +48,12 @@ const Auth0Config = {
   },
 };
 const firebaseConfig = {
-  apiKey: '',
-  authDomain: '',
-  databaseURL: '',
-  projectId: '',
-  storageBucket: '',
-  messagingSenderId: '',
+  apiKey: "AIzaSyDKwcofJqJodVbnOLZ5ONF_4sYBHepIkVE",
+  authDomain: "react-dojo-demo.firebaseapp.com",
+  databaseURL: "https://react-dojo-demo.firebaseio.com",
+  projectId: "react-dojo-demo",
+  storageBucket: "react-dojo-demo.appspot.com",
+  messagingSenderId: "892805662679"
 };
 const googleConfig = {
   apiKey: '', //
