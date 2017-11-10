@@ -6,7 +6,6 @@ import { Layout } from 'antd';
 import { Scrollbars } from 'react-custom-scrollbars';
 import Menu from '../../components/uielements/menu';
 import IntlMessages from '../../components/utility/intlMessages';
-import getDevSidebar from '../../customApp/sidebar';
 import SidebarWrapper from './sidebar.style';
 
 import appActions from '../../redux/app/actions';
