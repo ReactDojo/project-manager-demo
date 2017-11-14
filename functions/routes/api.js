@@ -24,6 +24,7 @@ const db = mongoose.connection;
 // Import Schema files
 const Project = require('../schema/Project');
 const Task = require('../schema/Task');
+const User = require('../schema/User');
 
 // Initialize Express Router
 const Router = express.Router();
@@ -46,7 +47,49 @@ Router.get('/project/:id', function (req, res) {
 
 // Performs a POST of new project data and returns a success, or error message in JSON
 Router.post('/project/new', function (req, res) {
-  let New = new Project({ name: req.body.project_name, description: req.body.project_description });
+
+  let New = new Project({
+    name: req.body.project_name,
+    description: req.body.project_description
+  });
+
+  New.save(function (err) {
+    if (err) {
+      res.json({ message: err });
+    } else {
+      res.json({ message: 'Successful!' });
+    }
+  })
+
+});
+
+Router.get('/project/:pid/tasks/', function (req, res) {
+
+});
+
+Router.post('/project/:pid/task/new', function (req, res) {
+
+});
+
+Router.get('/users', function (req, res) {
+  User.find({}).exec(function (err, users) {
+    if (err) return res.send(err);
+    return res.send(users);
+  });
+});
+
+Router.post('/users', function (req, res) {
+  let New = new User({
+    username: req.body.username, 
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    name: req.body.name,
+    mobile: req.body.mobile,
+    home: req.body.home,
+    company: req.body.company,
+    work: req.body.work,
+    note: req.body.note
+  });
   New.save(function (err) {
     if (err) {
       res.json({ message: err });
@@ -56,11 +99,14 @@ Router.post('/project/new', function (req, res) {
   })
 });
 
-Router.get('/project/:pid/tasks/', function (req, res) {
-
+Router.get('/user/:id', function (req, res) {
+  User.find({ "_id": req.params.id }).exec(function (err, user) {
+    if (err) return res.send(err);
+    return res.send(user);
+  });
 });
 
-Router.post('/project/:pid/task/new', function (req, res) {
+Router.put('/user/:id', function (req, res) {
 
 });
 
