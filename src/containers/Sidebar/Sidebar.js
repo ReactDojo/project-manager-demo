@@ -12,8 +12,6 @@ import appActions from '../../redux/app/actions';
 import Logo from '../../components/utility/logo';
 import { rtl } from '../../config/withDirection';
 
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 const { Sider } = Layout;
 const {
   toggleOpenDrawer,
@@ -93,10 +91,6 @@ class Sidebar extends Component {
     const scrollheight = app.height;
     const styling = {
       backgroundColor: customizedTheme.backgroundColor,
-    };
-    const submenuStyle = {
-      backgroundColor: 'rgba(0,0,0,0.3)',
-      color: customizedTheme.textColor,
     };
     const submenuColor = {
       color: customizedTheme.textColor,

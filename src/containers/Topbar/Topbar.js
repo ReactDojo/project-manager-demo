@@ -4,12 +4,9 @@ import { Layout } from 'antd';
 import appActions from '../../redux/app/actions';
 import TopbarWrapper from './topbar.style';
 import {
-  TopbarMail,
-  TopbarNotification,
   TopbarMessage,
   TopbarSearch,
   TopbarUser,
-  TopbarAddtoCart
 } from '../../components/topbar';
 
 const { Header } = Layout;
@@ -17,7 +14,7 @@ const { toggleCollapsed } = appActions;
 
 class Topbar extends Component {
   render() {
-    const { toggleCollapsed, url, customizedTheme } = this.props;
+    const { toggleCollapsed, customizedTheme } = this.props;
     const collapsed = this.props.collapsed && !this.props.openDrawer;
     // const padLeft = collapsed ? "89px" : "265px";
     const styling = {

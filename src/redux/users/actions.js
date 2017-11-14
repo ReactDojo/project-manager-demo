@@ -1,5 +1,3 @@
-import { users } from './reducer';
-
 function ascendingSort(user1, user2) {
   const name1 = user1.name ? user1.name.toUpperCase() : '~';
   const name2 = user2.name ? user2.name.toUpperCase() : '~';

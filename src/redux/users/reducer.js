@@ -1,5 +1,4 @@
 import { Map } from "immutable";
-import getData from "../../containers/Users/getData";
 import userActions from "./actions";
 
 const users = [];
