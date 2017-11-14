@@ -6,6 +6,9 @@ import Box from './box/reducer';
 import Notes from './notes/reducer';
 import Todos from './todos/reducer';
 import Contacts from './contacts/reducer';
+import Projects from './projects/reducer';
+import Tasks from './tasks/reducer';
+import Users from './users/reducer';
 import Cards from './card/reducer';
 import DynamicChartComponent from './dynamicEchart/reducer';
 import Ecommerce from './ecommerce/reducer';
@@ -29,5 +32,8 @@ export default {
   DynamicChartComponent,
   Ecommerce,
   YoutubeSearch,
+  Projects,
+  Tasks,
+  Users,
   ...DevReducers
 };
