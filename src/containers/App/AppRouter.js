@@ -345,6 +345,26 @@ class AppRouter extends React.Component {
           path={`${url}/youtubeSearch`}
           component={asyncComponent(() => import('../YoutubeSearch'))}
         />
+        <Route
+          exact
+          path={`${url}/projects`}
+          component={asyncComponent(() => import('../Projects'))}
+        />
+        <Route
+          exact
+          path={`${url}/sampleCode`}
+          component={asyncComponent(() => import('../AdvancedUI/sampleCode'))}
+        />
+        <Route
+          exact
+          path={`${url}/tasks`}
+          component={asyncComponent(() => import('../Tasks'))}
+        />
+        <Route
+          exact
+          path={`${url}/users`}
+          component={asyncComponent(() => import('../Users'))}
+        />
         {getDevRouters(url)}
       </Switch>
     );
