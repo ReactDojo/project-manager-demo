@@ -50,35 +50,12 @@ class Topbar extends Component {
             <li className="isoSearch">
               <TopbarSearch />
             </li>
-
-            <li
-              onClick={() => this.setState({ selectedItem: 'mail' })}
-              className="isoMail"
-            >
-              <TopbarMail url={url} />
-              {/* <Badge status="processing" /> */}
-            </li>
-
-            <li
-              onClick={() => this.setState({ selectedItem: 'notification' })}
-              className="isoNotify"
-            >
-              <TopbarNotification />
-            </li>
-
             <li
               onClick={() => this.setState({ selectedItem: 'message' })}
               className="isoMsg"
             >
               <TopbarMessage />
             </li>
-            <li
-              onClick={() => this.setState({ selectedItem: 'addToCart' })}
-              className="isoCart"
-            >
-              <TopbarAddtoCart url={url} />
-            </li>
-
             <li
               onClick={() => this.setState({ selectedItem: 'user' })}
               className="isoUser"
