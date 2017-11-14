@@ -10,6 +10,13 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }))
    .use(bodyParser.json());
 
+// Apply Access Headers to all requests (enable CORS)
+app.all('/*', function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
+
 // Use Express Router
 app.use('/', require('./routes/api'));
 
