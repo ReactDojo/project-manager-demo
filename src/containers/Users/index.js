@@ -10,7 +10,6 @@ import DeleteButton from '../../components/users/deleteButton';
 import { otherAttributes } from './getData';
 import IntlMessages from '../../components/utility/intlMessages';
 import { UsersWrapper } from './users.style';
-import { setInterval } from 'timers';
 
 const {
   changeUser,
@@ -26,6 +25,7 @@ class Users extends Component {
   constructor(props) {
     super(props);
     this.loadUsersFromServer = this.loadUsersFromServer.bind(this);
+    this.saveUserDataToServer = this.saveUserDataToServer.bind(this);
   }
 
   loadUsersFromServer() {
@@ -40,7 +40,28 @@ class Users extends Component {
       .then(users => {
         this.props.setUsers(users);
       });
+  }
 
+  saveUserDataToServer(user) {
+    var myHeaders = new Headers();
+
+    myHeaders.append('Content-Type', 'application/json');
+
+    //fetch(`https://us-central1-react-dojo-demo.cloudfunctions.net/app/user/${user._id}`, {
+    fetch(`http://localhost:5000/react-dojo-demo/us-central1/app/user/${user._id}`, {
+      method: "PUT",
+      headers: myHeaders,
+      body: JSON.stringify(user)
+    }).then(response => {
+      if (!response.ok) {
+        throw Error("Network request failed")
+      }
+      return response
+    }).then(d => d.json())
+      .then(users => {
+        console.log(users);
+      });
+    //console.log(user);
   }
 
   componentDidMount() {
@@ -62,7 +83,12 @@ class Users extends Component {
     const selectedUser = selectedId
       ? users.filter(user => user.id === selectedId)[0]
       : null;
-    const onViewChange = () => viewChange(!editView);
+    const onViewChange = () => {
+      if (editView) {
+        this.saveUserDataToServer(selectedUser);
+      }
+      viewChange(!editView);
+    }
     return (
       <UsersWrapper
         className="isomorphicUsers"
@@ -79,36 +105,16 @@ class Users extends Component {
         <Layout className="isoUserBoxWrapper">
           {selectedUser
             ? <Content className="isoUserBox">
-                <div className="isoUserControl">
-                  <Button type="button" onClick={onViewChange}>
-                    {editView
-                      ? <Icon type="check" />
-                      : <Icon type="edit" />}{' '}
-                  </Button>
-                  <DeleteButton
-                    deleteUser={deleteUser}
-                    user={selectedUser}
-                  />
-                  <Button
-                    type="primary"
-                    onClick={addUser}
-                    className="isoAddUserBtn"
-                  >
-                    <IntlMessages id="userlist.addNewUser" />
-                  </Button>
-                </div>
-                {editView
-                  ? <EditUserView
-                      user={selectedUser}
-                      editUser={editUser}
-                      otherAttributes={otherAttributes}
-                    />
-                  : <SingleUserView
-                      user={selectedUser}
-                      otherAttributes={otherAttributes}
-                    />}
-              </Content>
-            : <div className="isoUserControl">
+              <div className="isoUserControl">
+                <Button type="button" onClick={onViewChange}>
+                  {editView
+                    ? <Icon type="check" />
+                    : <Icon type="edit" />}{' '}
+                </Button>
+                <DeleteButton
+                  deleteUser={deleteUser}
+                  user={selectedUser}
+                />
                 <Button
                   type="primary"
                   onClick={addUser}
@@ -116,7 +122,27 @@ class Users extends Component {
                 >
                   <IntlMessages id="userlist.addNewUser" />
                 </Button>
-              </div>}
+              </div>
+              {editView
+                ? <EditUserView
+                  user={selectedUser}
+                  editUser={editUser}
+                  otherAttributes={otherAttributes}
+                />
+                : <SingleUserView
+                  user={selectedUser}
+                  otherAttributes={otherAttributes}
+                />}
+            </Content>
+            : <div className="isoUserControl">
+              <Button
+                type="primary"
+                onClick={addUser}
+                className="isoAddUserBtn"
+              >
+                <IntlMessages id="userlist.addNewUser" />
+              </Button>
+            </div>}
         </Layout>
       </UsersWrapper>
     );
