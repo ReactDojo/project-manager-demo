@@ -49,67 +49,6 @@ export default class IsoWidgets extends Component {
     return (
       <div style={wisgetPageStyle}>
         <Row style={rowStyle} gutter={0} justify="start">
-          <Col md={8} sm={24} xs={24} style={colStyle}>
-            <IsoWidgetsWrapper>
-              {/* Report Widget */}
-              <ReportsWidget
-                label={<IntlMessages id="widget.reportswidget.label" />}
-                details={<IntlMessages id="widget.reportswidget.details" />}
-              >
-                <SingleProgressWidget
-                  label={
-                    <IntlMessages id="widget.singleprogresswidget1.label" />
-                  }
-                  percent={70}
-                  barHeight={7}
-                  status="active"
-                  info={true} // Boolean: true, false
-                />
-                <SingleProgressWidget
-                  label={
-                    <IntlMessages id="widget.singleprogresswidget2.label" />
-                  }
-                  percent={80}
-                  barHeight={7}
-                  status="active"
-                  info={true} // Boolean: true, false
-                />
-                <SingleProgressWidget
-                  label={
-                    <IntlMessages id="widget.singleprogresswidget3.label" />
-                  }
-                  percent={40}
-                  barHeight={7}
-                  status="active"
-                  info={true} // Boolean: true, false
-                />
-                <SingleProgressWidget
-                  label={
-                    <IntlMessages id="widget.singleprogresswidget4.label" />
-                  }
-                  percent={60}
-                  barHeight={7}
-                  status="active"
-                  info={true} // Boolean: true, false
-                />
-              </ReportsWidget>
-            </IsoWidgetsWrapper>
-          </Col>
-
-          <Col md={16} sm={24} xs={24} style={colStyle}>
-            <IsoWidgetsWrapper>
-              <IsoWidgetBox>
-                {/* TABLE */}
-                <TableViews.SimpleView
-                  tableInfo={tableinfos[0]}
-                  dataList={tableDataList}
-                />
-              </IsoWidgetBox>
-            </IsoWidgetsWrapper>
-          </Col>
-        </Row>
-
-        <Row style={rowStyle} gutter={0} justify="start">
           <Col md={6} sm={12} xs={24} style={colStyle}>
             <IsoWidgetsWrapper>
               {/* Sticker Widget */}
