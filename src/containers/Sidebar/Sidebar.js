@@ -130,7 +130,7 @@ class Sidebar extends Component {
               <Menu.Item key="dashboard">
                 <Link to={`/dashboard`}>
                   <span className="isoMenuHolder" style={submenuColor}>
-                    <i className="ion-android-mail" />
+                    <i className="ion-grid" />
                     <span className="nav-text">
                       <IntlMessages id="sidebar.dashboard" />
                     </span>
@@ -138,51 +138,60 @@ class Sidebar extends Component {
                 </Link>
               </Menu.Item>
 
-              <SubMenu
-                key="projects"
-                title={
+              <Menu.Item key="projects">
+                <Link to={`${url}/projects`}>
                   <span className="isoMenuHolder" style={submenuColor}>
-                    <i className="ion-bag" />
+                    <i className="ion-clipboard" />
                     <span className="nav-text">
                       <IntlMessages id="sidebar.projects" />
                     </span>
                   </span>
-                }
-              >
-                <Menu.Item style={submenuStyle} key="projects-add">
-                  <Link style={submenuColor} to={`/project/new`}>
-                    <IntlMessages id="sidebar.projects-add" />
-                  </Link>
-                </Menu.Item>
-                <Menu.Item style={submenuStyle} key="projects-viewall">
-                  <Link style={submenuColor} to={`/projects`}>
-                    <IntlMessages id="sidebar.projects-viewall" />
-                  </Link>
-                </Menu.Item>
-              </SubMenu>
+                </Link>
+              </Menu.Item>
 
-              <SubMenu
-                key="tasks"
-                title={
+              <Menu.Item key="tasks">
+                <Link to={`${url}/tasks`}>
                   <span className="isoMenuHolder" style={submenuColor}>
-                    <i className="ion-bag" />
+                    <i className="ion-android-list" />
                     <span className="nav-text">
                       <IntlMessages id="sidebar.tasks" />
                     </span>
                   </span>
-                }
-              >
-                <Menu.Item style={submenuStyle} key="tasks-add">
-                  <Link style={submenuColor} to={`/task/new`}>
-                    <IntlMessages id="sidebar.tasks-add" />
-                  </Link>
-                </Menu.Item>
-                <Menu.Item style={submenuStyle} key="tasks-viewall">
-                  <Link style={submenuColor} to={`/tasks`}>
-                    <IntlMessages id="sidebar.tasks-viewall" />
-                  </Link>
-                </Menu.Item>
-              </SubMenu>
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item key="users">
+                <Link to={`${url}/users`}>
+                  <span className="isoMenuHolder" style={submenuColor}>
+                    <i className="ion-android-person-add" />
+                    <span className="nav-text">
+                      <IntlMessages id="sidebar.users" />
+                    </span>
+                  </span>
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item key="samplecode">
+                <Link to={`${url}/samplecode`}>
+                  <span className="isoMenuHolder" style={submenuColor}>
+                    <i className="ion-code" />
+                    <span className="nav-text">
+                      <IntlMessages id="sidebar.samplecode" />
+                    </span>
+                  </span>
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item key="signout">
+                <Link to={`${url}/signout`}>
+                  <span className="isoMenuHolder" style={submenuColor}>
+                    <i className="ion-log-out" />
+                    <span className="nav-text">
+                      <IntlMessages id="sidebar.signout" />
+                    </span>
+                  </span>
+                </Link>
+              </Menu.Item>
 
             </Menu>
           </Scrollbars>
