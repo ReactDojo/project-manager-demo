@@ -47,12 +47,10 @@ Router.get('/project/:id', function (req, res) {
 
 // Performs a POST of new project data and returns a success, or error message in JSON
 Router.post('/project/new', function (req, res) {
-
   let New = new Project({
     name: req.body.project_name,
     description: req.body.project_description
   });
-
   New.save(function (err) {
     if (err) {
       res.json({ message: err });
@@ -60,7 +58,6 @@ Router.post('/project/new', function (req, res) {
       res.json({ message: 'Successful!' });
     }
   })
-
 });
 
 Router.get('/project/:pid/tasks/', function (req, res) {
@@ -107,7 +104,30 @@ Router.get('/user/:id', function (req, res) {
 });
 
 Router.put('/user/:id', function (req, res) {
-
+  console.log(req.params.id);
+  User.findById(req.params.id,  function (err, user) {
+    if (err) {
+      res.json({ error: err });
+      //res.status(500).send(err);
+    } else {
+      user.firstName = req.body.firstName || user.firstName;
+      user.lastName = req.body.lastName || user.lastName;
+      user.name = req.body.name || user.name;
+      user.mobile = req.body.mobile || user.mobile;
+      user.home = req.body.home || user.home;
+      user.company = req.body.company || user.company;
+      user.work = req.body.work || user.work;
+      user.note = req.body.note || user.note;
+      user.save((err, user) => {
+        if (err) {
+          res.json({ error: err });
+          //res.status(500).send(err)
+        }
+        res.json({ user: user });
+        //res.status(200).send(user);
+      });
+    }
+  });
 });
 
 module.exports = Router;
