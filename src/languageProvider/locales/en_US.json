@@ -634,6 +634,7 @@
   "Map.leaflet.leafletMarkerClusterTitle": "Basic Map(With Marker Cluster",
   "Map.leaflet.leafletRoutingTitle": "Basic Map Routing",
   "Component.contacts.noOption": "No contact found",
+  "Component.users.noOption": "No users found",
   "email.send": "SEND",
   "email.cancel": "CANCEL",
   "email.compose": "COMPOSE",
