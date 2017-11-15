@@ -5,7 +5,7 @@ import notification from '../notification';
 
 export default class DeleteButton extends Component {
   render() {
-    const { user, deleteUser } = this.props;
+    const { user, deleteUser, deleteUserDataOnServer } = this.props;
     let name = '';
     if (user.firstName) {
       name = `${user.firstName} `;
@@ -23,7 +23,8 @@ export default class DeleteButton extends Component {
         cancelText="No"
         onConfirm={() => {
           notification('error', `Deleted ${name}`, '');
-          deleteUser(user.id);
+          deleteUser(user._id);
+          deleteUserDataOnServer(user._id);
         }}
       >
         <Button icon="close" type="button" className="isoDeleteBtn" />
