@@ -81,6 +81,7 @@ Router.post('/users', function (req, res) {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     name: req.body.name,
+    avatar: req.body.avatar,
     mobile: req.body.mobile,
     home: req.body.home,
     company: req.body.company,
@@ -89,7 +90,7 @@ Router.post('/users', function (req, res) {
   });
   New.save(function (err) {
     if (err) {
-      res.json({ message: err });
+      res.json({ err });
     } else {
       res.json({ message: 'Successful!' });
     }
@@ -104,15 +105,14 @@ Router.get('/user/:id', function (req, res) {
 });
 
 Router.put('/user/:id', function (req, res) {
-  console.log(req.params.id);
   User.findById(req.params.id,  function (err, user) {
     if (err) {
-      res.json({ error: err });
-      //res.status(500).send(err);
+      res.status(500).send(err);
     } else {
       user.firstName = req.body.firstName || user.firstName;
       user.lastName = req.body.lastName || user.lastName;
       user.name = req.body.name || user.name;
+      user.avatar = req.body.avatar || user.avatar;
       user.mobile = req.body.mobile || user.mobile;
       user.home = req.body.home || user.home;
       user.company = req.body.company || user.company;
@@ -120,14 +120,26 @@ Router.put('/user/:id', function (req, res) {
       user.note = req.body.note || user.note;
       user.save((err, user) => {
         if (err) {
-          res.json({ error: err });
-          //res.status(500).send(err)
+          res.status(500).send(err)
         }
-        res.json({ user: user });
-        //res.status(200).send(user);
+        res.status(200).send(user);
       });
     }
   });
+});
+
+Router.delete('/user/:id', function (req, res) {
+  User.findByIdAndRemove(req.params.id, function (err, user) {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      let message = { 
+        success: true,
+        message: 'User successfully deleted!'
+      }
+      res.status(200).send(message);
+    }
+  })
 });
 
 module.exports = Router;
