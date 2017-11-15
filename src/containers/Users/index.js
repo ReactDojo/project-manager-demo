@@ -10,6 +10,7 @@ import DeleteButton from '../../components/users/deleteButton';
 import { otherAttributes } from './getData';
 import IntlMessages from '../../components/utility/intlMessages';
 import { UsersWrapper } from './users.style';
+import apiUrl from '../../config'
 
 const {
   changeUser,
@@ -25,11 +26,13 @@ class Users extends Component {
   constructor(props) {
     super(props);
     this.loadUsersFromServer = this.loadUsersFromServer.bind(this);
-    this.saveUserDataToServer = this.saveUserDataToServer.bind(this);
+    this.updateUserDataOnServer = this.updateUserDataOnServer.bind(this);
+    this.addUserDataOnServer = this.addUserDataOnServer.bind(this);
+    this.deleteUserDataOnServer = this.deleteUserDataOnServer.bind(this);
   }
 
   loadUsersFromServer() {
-    fetch('https://us-central1-react-dojo-demo.cloudfunctions.net/app/users/')
+    fetch(`${apiUrl}/users`)
       .then(response => {
         if (!response.ok) {
           throw Error("Network request failed")
@@ -42,26 +45,60 @@ class Users extends Component {
       });
   }
 
-  saveUserDataToServer(user) {
+  updateUserDataOnServer(user) {
     var myHeaders = new Headers();
-
     myHeaders.append('Content-Type', 'application/json');
 
-    //fetch(`https://us-central1-react-dojo-demo.cloudfunctions.net/app/user/${user._id}`, {
-    fetch(`http://localhost:5000/react-dojo-demo/us-central1/app/user/${user._id}`, {
+    fetch(`${apiUrl}/user/${user._id}`, {
       method: "PUT",
       headers: myHeaders,
       body: JSON.stringify(user)
     }).then(response => {
       if (!response.ok) {
-        throw Error("Network request failed")
+        console.log(response);
       }
       return response
     }).then(d => d.json())
       .then(users => {
         console.log(users);
       });
-    //console.log(user);
+  }
+
+  deleteUserDataOnServer(user_id) {
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch(`${apiUrl}/user/${user_id}`, {
+      method: "DELETE",
+      headers: myHeaders
+    }).then(response => {
+      if (!response.ok) {
+        console.log(response);
+      }
+      return response
+    }).then(d => d.json())
+      .then(users => {
+        console.log(users);
+      });
+  }
+
+  addUserDataOnServer(user) {
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    fetch(`${apiUrl}/users`, {
+      method: "POST",
+      headers: myHeaders,
+      body: JSON.stringify(user)
+    }).then(response => {
+      if (!response.ok) {
+        console.log(response);
+      }
+      return response
+    }).then(d => d.json())
+      .then(users => {
+        console.log(users);
+      });
   }
 
   componentDidMount() {
@@ -81,11 +118,15 @@ class Users extends Component {
       viewChange
     } = this.props;
     const selectedUser = selectedId
-      ? users.filter(user => user.id === selectedId)[0]
+      ? users.filter(user => user._id === selectedId)[0]
       : null;
     const onViewChange = () => {
       if (editView) {
-        this.saveUserDataToServer(selectedUser);
+        if (selectedUser._id instanceof Date) {
+          this.addUserDataOnServer(selectedUser);
+        } else {
+          this.updateUserDataOnServer(selectedUser);
+        }
       }
       viewChange(!editView);
     }
@@ -100,6 +141,7 @@ class Users extends Component {
             selectedId={selectedId}
             changeUser={changeUser}
             deleteUser={deleteUser}
+            deleteUserDataOnServer={this.deleteUserDataOnServer}
           />
         </Sider>
         <Layout className="isoUserBoxWrapper">
@@ -112,6 +154,7 @@ class Users extends Component {
                     : <Icon type="edit" />}{' '}
                 </Button>
                 <DeleteButton
+                  deleteUserDataOnServer={this.deleteUserDataOnServer}
                   deleteUser={deleteUser}
                   user={selectedUser}
                 />
