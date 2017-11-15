@@ -15,25 +15,23 @@ var User = new Schema({
         type: String,
         required: true
     },
+    avatar: {
+        type: String
+    },
     mobile: { 
         type: String,
-        required: true
     },
     home: { 
         type: String,
-        required: true
     },
     company: { 
         type: String,
-        required: true
     },
     work: { 
         type: String,
-        required: true
     },
     note: { 
         type: String,
-        required: true
     }
 });
 
