@@ -1,10 +1,9 @@
-export default {
-  apiUrl: 'http://yoursite.com/api/',
-};
+const apiUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:5000/react-dojo-demo/us-central1/app' : 'https://us-central1-react-dojo-demo.cloudfunctions.net/app'
+
 const siteConfig = {
-  siteName: 'ISOMORPHIC',
+  siteName: 'ReactDojo',
   siteIcon: 'ion-flash',
-  footerText: 'Isomorphic ©2017 Created by RedQ, Inc',
+  footerText: 'React Dojo Demo Project created by Zentomic',
 };
 
 const themeConfig = {
@@ -68,6 +67,7 @@ const mapboxConfig = {
 };
 const youtubeSearchApi = '';
 export {
+  apiUrl as default,
   siteConfig,
   themeConfig,
   language,
