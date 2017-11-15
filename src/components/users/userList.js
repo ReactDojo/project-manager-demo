@@ -22,12 +22,12 @@ export default class UserList extends Component {
     };
   }
   singleUser(user) {
-    const { selectedId, deleteUser, changeUser } = this.props;
-    const activeClass = selectedId === user.id ? 'active' : '';
-    const onChange = () => changeUser(user.id);
+    const { selectedId, deleteUser, deleteUserDataOnServer, changeUser } = this.props;
+    const activeClass = selectedId === user._id ? 'active' : '';
+    const onChange = () => changeUser(user._id);
     return (
       <div
-        key={user.id}
+        key={user._id}
         className={`${activeClass} isoSingleUser`}
         onClick={onChange}
       >
@@ -37,7 +37,7 @@ export default class UserList extends Component {
         <div className="isoUserName">
           <h3>{user.name ? user.name : 'No Name'}</h3>
         </div>
-        <DeleteButton deleteUser={deleteUser} user={user} />
+        <DeleteButton deleteUser={deleteUser} deleteUserDataOnServer={deleteUserDataOnServer} user={user} />
       </div>
     );
   }
