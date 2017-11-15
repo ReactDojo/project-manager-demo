@@ -17,9 +17,9 @@ const userActions = {
   }),
   addUser: () => {
     const newUser = {
-      id: new Date(),
+      _id: new Date(),
       firstName: '',
-      avatar: '',
+      avatar: 'http://i.imgur.com/hfH9CiC.png',
       LastName: '',
       mobile: '',
       home: '',
@@ -32,7 +32,7 @@ const userActions = {
       dispatch({
         type: userActions.ADD_USER,
         users: [...getState().Users.get('users'), newUser],
-        selectedId: newUser.id,
+        selectedId: newUser._id,
       });
     };
   },
@@ -41,7 +41,7 @@ const userActions = {
       const users = getState().Users.get('users');
       const newUsers = [];
       users.forEach(user => {
-        if (user.id === newUser.id) {
+        if (user._id === newUser._id) {
           newUsers.push(newUser);
         } else {
           newUsers.push(user);
@@ -59,7 +59,7 @@ const userActions = {
       const selectedId = getState().Users.get('selectedId');
       const newUsers = [];
       users.forEach(user => {
-        if (user.id === id) {
+        if (user._id === id) {
         } else {
           newUsers.push(user);
         }
