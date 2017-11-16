@@ -165,19 +165,41 @@ class Sidebar extends Component {
                 </Link>
               </Menu.Item>
 
-              <Menu.Item key="samplecode">
-                <Link to={`${url}/samplecode`}>
+              <Menu.Item key="youtubeSearch">
+                <Link to={`${url}/youtubeSearch`}>
+                  <span className="isoMenuHolder" style={submenuColor}>
+                    <i className="ion-social-youtube" />
+                    <span className="nav-text">
+                      <IntlMessages id="sidebar.youtubeSearch" />
+                    </span>
+                  </span>
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item key="samplecode1">
+                <Link to={`${url}/samplecode1`}>
                   <span className="isoMenuHolder" style={submenuColor}>
                     <i className="ion-code" />
                     <span className="nav-text">
-                      <IntlMessages id="sidebar.samplecode" />
+                      <IntlMessages id="sidebar.samplecode1" />
+                    </span>
+                  </span>
+                </Link>
+              </Menu.Item>
+
+              <Menu.Item key="samplecode2">
+                <Link to={`${url}/samplecode2`}>
+                  <span className="isoMenuHolder" style={submenuColor}>
+                    <i className="ion-code" />
+                    <span className="nav-text">
+                      <IntlMessages id="sidebar.samplecode2" />
                     </span>
                   </span>
                 </Link>
               </Menu.Item>
 
               <Menu.Item key="signout">
-                <Link to={`${url}/signout`}>
+                <Link to={`/signin`}>
                   <span className="isoMenuHolder" style={submenuColor}>
                     <i className="ion-log-out" />
                     <span className="nav-text">
