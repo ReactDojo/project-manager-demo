@@ -3,21 +3,21 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var Task = new Schema({
-    _projectID: {
-        type: Schema.Types.ObjectId,
-        required: true
-    },
-    name: {
+    task: {
         type: String,
         required: true
     },
-    description: { 
-        type: String,
-        required: true
-    },
-    startdate: { 
+    createTime: { 
         type: Date,
-        required: true
+        default: Date.now
+    },
+    color: { 
+        type: Number,
+        default: 0
+    },
+    completed: {
+        type: Boolean,
+        default: false
     }
 });
 
