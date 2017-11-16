@@ -1,12 +1,11 @@
 import { Map } from "immutable";
-import fakeData from "../../containers/Projects/fakeData";
 import projectActions from "./actions";
 
-const projects = new fakeData(10).getAll();
+const projects = [];
 
 const initState = new Map({
   projects,
-  selectedId: projects[0].id,
+  selectedId: 0,
   editView: false
 });
 
