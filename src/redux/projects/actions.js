@@ -1,5 +1,3 @@
-import { projects } from './reducer';
-
 function ascendingSort(project1, project2) {
   const name1 = project1.name ? project1.name.toUpperCase() : '~';
   const name2 = project2.name ? project2.name.toUpperCase() : '~';
@@ -20,7 +18,7 @@ const projectActions = {
     const newProject = {
       id: new Date(),
       firstName: '',
-      avatar: projects[new Date() % 10].avatar,
+      avatar: 'https://www.naplesgarden.org/wp-content/themes/naples_botanical/img/notfound.jpg',
       LastName: '',
       mobile: '',
       home: '',
@@ -57,7 +55,7 @@ const projectActions = {
   deleteProject: (id) => {
     return (dispatch, getState) => {
       const projects = getState().Projects.get('projects');
-      const seectedId = getState().Projects.get('seectedId');
+      const selectedId = getState().Projects.get('selectedId');
       const newProjects = [];
       projects.forEach(project => {
         if (project.id === id) {
@@ -68,7 +66,7 @@ const projectActions = {
       dispatch({
         type: projectActions.DELETE__PROJECT,
         projects: newProjects,
-        seectedId: id === seectedId ? undefined : seectedId,
+        selectedId: id === selectedId ? undefined : selectedId,
       });
     };
   },
