@@ -80,7 +80,7 @@ export default class extends Component {
     const { rowStyle, colStyle, gutter } = basicStyle;
     return (
       <LayoutWrapper>
-        <PageHeader>Sample Code</PageHeader>
+        <PageHeader>React Sample Code</PageHeader>
         <Row style={rowStyle} gutter={gutter} justify="start">
           <Col md={24} sm={24} xs={24} style={colStyle}>
             <Box title="Basic Example">
