@@ -29,6 +29,10 @@ const User = require('../schema/User');
 // Initialize Express Router
 const Router = express.Router();
 
+/*
+ *  Routing for /projects
+ */
+
 // Return JSON of all project data from db
 Router.get('/projects', function (req, res) {
   Project.find({}).exec(function (err, project) {
@@ -67,6 +71,10 @@ Router.get('/project/:pid/tasks/', function (req, res) {
 Router.post('/project/:pid/task/new', function (req, res) {
 
 });
+
+/*
+ *  Routing for /users
+ */
 
 Router.get('/users', function (req, res) {
   User.find({}).exec(function (err, users) {
@@ -135,11 +143,92 @@ Router.delete('/user/:id', function (req, res) {
     } else {
       let message = { 
         success: true,
+        type: 'success',
         message: 'User successfully deleted!'
       }
       res.status(200).send(message);
     }
   })
+});
+
+/*
+ *  Routing for /tasks
+ */
+
+Router.get('/tasks', function (req, res) {
+  Task.find({}).exec(function (err, tasks) {
+    if (err) return res.send(err);
+    return res.send(tasks);
+  });
+});
+
+Router.post('/tasks', function (req, res) {
+  let New = new Task({ task: req.body.task });
+  New.save(function (err) {
+    if (err) {
+      res.json({ message: err });
+    } else {
+      res.json({ message: 'Successful!' });
+    }
+  })
+});
+
+Router.put('/task/:id', function (req, res) {
+  Task.findById(req.params.id,  function (err, task) {
+    if (err) {
+      let message = { 
+        success: false,
+        type: 'error',
+        message: 'Error deleting task!',
+        description: err
+      }
+      res.json(message);
+    } else {
+      task.task = req.body.task || task.task;
+      task.createTime = req.body.createTime || task.createTime;
+      task.color = req.body.color || task.color;
+      task.completed = req.body.completed || task.completed;
+      task.save((err, task) => {
+        let message = { 
+          success: true,
+          type: 'success',
+          message: 'Successfully updated task!',
+          description: ''
+        }
+        if (err) {
+          message = { 
+            success: false,
+            type: 'error',
+            message: 'Error updating task!',
+            description: err
+          }
+        }
+        res.json(message);
+      });
+    }
+  });
+});
+
+Router.delete('/task/:id', function (req, res) {
+  Task.findByIdAndRemove(req.params.id, function (err, task) {
+    if (err) {
+      let message = { 
+        success: false,
+        type: 'error',
+        message: 'Error deleting task!',
+        description: err
+      }
+      res.json(message);
+    } else {
+      let message = { 
+        success: true,
+        type: 'success',
+        message: 'Task successfully deleted!',
+        description: ''
+      }
+      res.json(message);
+    }
+  });
 });
 
 module.exports = Router;
