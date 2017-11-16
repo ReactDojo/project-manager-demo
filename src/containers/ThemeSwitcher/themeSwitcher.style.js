@@ -169,7 +169,7 @@ const ThemeSwitcherStyle = styled.div`
     border: 0;
     position: absolute;
     text-align: center;
-    top: 100px;
+    bottom: 100px;
     left: ${props => (props['data-rtl'] === 'rtl' ? 'inherit' : '-50px')};
     right: ${props => (props['data-rtl'] === 'rtl' ? '-50px' : 'inherit')};
     cursor: pointer;
