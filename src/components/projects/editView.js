@@ -4,6 +4,7 @@ import Input from '../uielements/input';
 import Upload from '../uielements/upload';
 import notification from '../notification';
 import { ProjectCardWrapper } from './projectCard.style';
+import DatePicker from '../uielements/datePicker.js';
 import './upload.css';
 
 function beforeUpload(file) {
@@ -22,25 +23,21 @@ function beforeUpload(file) {
 }
 export default class editProjectView extends Component {
   render() {
-    const { project, otherAttributes } = this.props;
-    const name = project.name ? project.name : 'No Name';
+    const { project } = this.props;
+    const name = project.name ? project.name : 'Untitled Project';
     const extraInfos = [];
-    const names = [
-      { value: 'firstName', title: 'First Name' },
-      { value: 'lastName', title: 'Last Name' },
+    const details = [
+      { value: 'name', title: 'Title' },
+      { value: 'startdate', title: 'Start Date' },
+      { value: 'enddate', title: 'End Date' },
+      { value: 'rate', title: 'Pay Rate' },
+      { value: 'status', title: 'Status' },
+      { value: 'note', title: 'Notes' },
     ];
-    [...names, ...otherAttributes].forEach(attribute => {
+    [...details].forEach(attribute => {
       const value = project[attribute.value];
       const editProject = event => {
         project[attribute.value] = event.target.value;
-        let name = '';
-        if (project.firstName) {
-          name = `${project.firstName} `;
-        }
-        if (project.lastName) {
-          name = `${name}${project.lastName}`;
-        }
-        project.name = name;
         this.props.editProject(project);
       };
       if (attribute.value === 'note') {
@@ -54,6 +51,13 @@ export default class editProjectView extends Component {
               rows={5}
               onChange={event => editProject(event)}
             />
+          </div>
+        );
+      } else if (attribute.value === 'startdate' || attribute.value === 'enddate') {
+        extraInfos.push(
+          <div className="isoProjectCardInfos" key={attribute.value}>
+            <p className="isoInfoLabel">{`${attribute.title}`}</p>
+            <DatePicker />
           </div>
         );
       } else {
