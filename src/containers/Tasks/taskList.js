@@ -9,6 +9,8 @@ import {
   EditableComponent,
 } from '../../components/';
 import { TaskListWrapper } from './task.style';
+import { updateTaskInDB, deleteTaskFromDB } from './dataHelper';
+
 
 function filterTasks(tasks, search) {
   const selectedTasks =
@@ -34,13 +36,21 @@ export default class TaskList extends Component {
   }
   singleTask(task) {
     const { deleteTask, colors } = this.props;
-    const onDelete = () => deleteTask(task.id);
+    const onDelete = () => {
+      deleteTask(task._id);
+      deleteTaskFromDB(task, (t) => {
+        notification(`${t.type}`, `${t.message}`, `${t.description}`);
+      });
+    }
     const updateTask = (key, value) => {
       task[key] = value;
       this.props.edittask(task);
+      updateTaskInDB(task, (t) => {
+        notification(`${t.type}`, `${t.message}`, `${t.description}`);
+      });
     };
     return (
-      <div className="isoTaskList" key={task.id}>
+      <div className="isoTaskList" key={task._id}>
         <ColorChoser
           colors={colors}
           changeColor={value => updateTask('color', value)}
@@ -73,7 +83,7 @@ export default class TaskList extends Component {
   }
   render() {
     const { search } = this.state;
-    const { selectedTasks, completed } = filterTasks(this.props.tasks, search);
+    const { selectedTasks } = filterTasks(this.props.tasks, search);
     return (
       <TaskListWrapper className="isoTaskContent">
         <div className="isoTaskStatusTab">
@@ -96,34 +106,6 @@ export default class TaskList extends Component {
           )}
         </div>
 
-        <div className="isoTaskFooter">
-          <Checkbox
-            className="isoTaskCheckAll"
-            checked={completed === selectedTasks.length}
-            disabled={completed === selectedTasks.length}
-            onChange={event => {
-              notification('success', 'All Tasks are Completed!!!', '');
-              this.props.allCompleted();
-            }}
-          >
-            Mark all as completed
-          </Checkbox>
-
-          {selectedTasks.length > 0 && completed === selectedTasks.length ? (
-            <Button
-              type="button"
-              className="isoDeleteAll"
-              onClick={event => {
-                notification('success', 'All Completed Tasks are Deleted', '');
-                this.props.deleteCompleted();
-              }}
-            >
-              {`Delete Completed (${completed})`}
-            </Button>
-          ) : (
-            ''
-          )}
-        </div>
       </TaskListWrapper>
     );
   }
