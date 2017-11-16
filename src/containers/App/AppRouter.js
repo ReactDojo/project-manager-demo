@@ -352,8 +352,13 @@ class AppRouter extends React.Component {
         />
         <Route
           exact
-          path={`${url}/sampleCode`}
-          component={asyncComponent(() => import('../AdvancedUI/sampleCode'))}
+          path={`${url}/sampleCode1`}
+          component={asyncComponent(() => import('../AdvancedUI/sampleCode1'))}
+        />
+        <Route
+          exact
+          path={`${url}/sampleCode2`}
+          component={asyncComponent(() => import('../AdvancedUI/sampleCode2'))}
         />
         <Route
           exact
