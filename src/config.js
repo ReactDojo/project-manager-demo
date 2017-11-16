@@ -26,14 +26,14 @@ const Auth0Config = {
       redirect: false,
     },
     languageDictionary: {
-      title: 'Isomorphic',
-      emailInputPlaceholder: 'demo@gmail.com',
+      title: 'React Dojo Demo',
+      emailInputPlaceholder: 'reactdojodemo@gmail.com',
       passwordInputPlaceholder: 'demodemo',
     },
     icon: '',
     theme: {
       labeledSubmitButton: true,
-      logo: 'https://s3.amazonaws.com/redqteam.com/logo/isomorphic.png',
+      logo: '',
       primaryColor: '#E14615',
       authButtons: {
         connectionName: {
