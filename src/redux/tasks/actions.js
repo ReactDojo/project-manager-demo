@@ -1,12 +1,13 @@
 const taskActions = {
   CHANGE_TASK: 'CHANGE_TASK',
+  SET_TASKS: 'SET_TASKS',
   ALL_COMPLETED: 'ALL_COMPLETED',
   DELETE_COMPLETED: 'DELETE_COMPLETED',
 
   addTask: (task) => {
     return (dispatch, getState) => {
       const newTask = {
-        id: new Date(),
+        _id: new Date(),
         task: task,
         createTime: new Date(),
         color: 0,
@@ -19,12 +20,20 @@ const taskActions = {
       });
     };
   },
+  setTasks: (tasks) => {
+    return (dispatch, getState) => {
+      dispatch({
+        type: taskActions.SET_TASKS,
+        tasks
+      });
+    };
+  },
   edittask: (editTask) => {
     return (dispatch, getState) => {
       const oldTasks = getState().Tasks.get('tasks');
       const tasks = [];
       oldTasks.forEach(task => {
-        if (task.id !== editTask.id) {
+        if (task._id !== editTask._id) {
           tasks.push(task);
         } else {
           tasks.push(editTask);
@@ -36,12 +45,12 @@ const taskActions = {
       });
     };
   },
-  deleteTask: (id) => {
+  deleteTask: (_id) => {
     return (dispatch, getState) => {
       const oldTasks = getState().Tasks.get('tasks');
       const tasks = [];
       oldTasks.forEach(task => {
-        if (task.id !== id) {
+        if (task._id !== _id) {
           tasks.push(task);
         }
       });
