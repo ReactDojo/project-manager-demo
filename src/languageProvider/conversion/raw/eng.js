@@ -450,15 +450,15 @@ BACK HOME
 Internal Server Error
 Something went wrong. Please try again letter.
 BACK HOME
-Isomorphic
+React Dojo
 Forgot Password?
 Enter your email and we send you a reset link.
 Send request
-Isomorphic
+React Dojo
 Reset Password
 Enter new password and confirm it.
 Save
-Isomorphic
+React Dojo
 Remember me
 Sign in
 username  demo   password  demodemo   or Just click on any button.
@@ -466,8 +466,8 @@ Sign in with Facebook
 Sign in with Google Plus
 Sign in with Auth0
 Forgot password
-Create an Isomorphoic account
-Isomorphic
+Create an React Dojo account
+React Dojo
 I agree with terms and condtions
 Sign Up
 Sign up with Facebook
