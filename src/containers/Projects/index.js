@@ -7,7 +7,6 @@ import ProjectList from '../../components/projects/projectList';
 import SingleProjectView from '../../components/projects/singleView';
 import EditProjectView from '../../components/projects/editView';
 import DeleteButton from '../../components/projects/deleteButton';
-import { otherAttributes } from './fakeData';
 import IntlMessages from '../../components/utility/intlMessages';
 import { ProjectsWrapper } from './projects.style';
 
@@ -74,11 +73,9 @@ class Projects extends Component {
                   ? <EditProjectView
                       project={selectedProject}
                       editProject={editProject}
-                      otherAttributes={otherAttributes}
                     />
                   : <SingleProjectView
                       project={selectedProject}
-                      otherAttributes={otherAttributes}
                     />}
               </Content>
             : <div className="isoProjectControl">
