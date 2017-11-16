@@ -98,9 +98,21 @@ Router.post('/users', function (req, res) {
   });
   New.save(function (err) {
     if (err) {
-      res.json({ err });
+      let message = { 
+        success: false,
+        type: 'error',
+        message: 'Error saving new user!',
+        description: err
+      }
+      res.json(message);
     } else {
-      res.json({ message: 'Successful!' });
+      let message = { 
+        success: true,
+        type: 'success',
+        message: 'Successfully added new user!',
+        description: ''
+      }
+      res.json(message);
     }
   })
 });
@@ -115,7 +127,13 @@ Router.get('/user/:id', function (req, res) {
 Router.put('/user/:id', function (req, res) {
   User.findById(req.params.id,  function (err, user) {
     if (err) {
-      res.status(500).send(err);
+      let message = { 
+        success: false,
+        type: 'error',
+        message: 'Error locating user data!',
+        description: err
+      }
+      res.status(500).json(message);
     } else {
       user.firstName = req.body.firstName || user.firstName;
       user.lastName = req.body.lastName || user.lastName;
@@ -128,9 +146,22 @@ Router.put('/user/:id', function (req, res) {
       user.note = req.body.note || user.note;
       user.save((err, user) => {
         if (err) {
-          res.status(500).send(err)
+          let message = { 
+            success: false,
+            type: 'error',
+            message: 'Error saving user data!',
+            description: err
+          }
+          res.status(500).json(message)
+        } else {
+          let message = { 
+            success: true,
+            type: 'success',
+            message: 'Successfully updated user data!',
+            description: ''
+          }
+          res.status(200).json(message);
         }
-        res.status(200).send(user);
       });
     }
   });
@@ -139,14 +170,21 @@ Router.put('/user/:id', function (req, res) {
 Router.delete('/user/:id', function (req, res) {
   User.findByIdAndRemove(req.params.id, function (err, user) {
     if (err) {
-      res.status(500).send(err);
+      let message = { 
+        success: false,
+        type: 'error',
+        message: 'Error deleting user data!',
+        description: err
+      }
+      res.status(500).json(message);
     } else {
       let message = { 
         success: true,
         type: 'success',
-        message: 'User successfully deleted!'
+        message: 'User successfully deleted!',
+        description: ''
       }
-      res.status(200).send(message);
+      res.status(200).json(message);
     }
   })
 });
@@ -166,9 +204,21 @@ Router.post('/tasks', function (req, res) {
   let New = new Task({ task: req.body.task });
   New.save(function (err) {
     if (err) {
-      res.json({ message: err });
+      let message = { 
+        success: false,
+        type: 'error',
+        message: 'Error adding new task!',
+        description: err
+      }
+      res.json(message);
     } else {
-      res.json({ message: 'Successful!' });
+      let message = { 
+        success: true,
+        type: 'success',
+        message: 'Successfully added new task!',
+        description: ''
+      }
+      res.json(message);
     }
   })
 });
