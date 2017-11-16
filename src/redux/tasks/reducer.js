@@ -1,9 +1,8 @@
 import { Map } from 'immutable';
-import fakeData from '../../containers/Tasks/fakeData';
 import taskActions from './actions';
 
 const colors = ['#7ED321', '#de1b1b', '#511E78', '#ff9009', '#42a5f5'];
-const tasks = new fakeData(5, colors.length).getAll();
+const tasks = [];
 
 const initState = new Map({
   tasks,
@@ -29,6 +28,8 @@ export default function taskReducer(state = initState, action) {
         }
       });
       return state.set('tasks', newtasks);
+    case taskActions.SET_TASKS:
+      return state.set('tasks', action.tasks);
     default:
       return state;
   }
