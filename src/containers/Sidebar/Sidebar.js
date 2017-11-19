@@ -198,8 +198,19 @@ class Sidebar extends Component {
                 </Link>
               </Menu.Item>
 
+              <Menu.Item key="api">
+                <a href="http://swagger.reactdojo.com/" target="_blank">
+                  <span className="isoMenuHolder" style={submenuColor}>
+                    <i className="ion-leaf" />
+                    <span className="nav-text">
+                      <IntlMessages id="sidebar.api" />
+                    </span>
+                  </span>
+                </a>
+              </Menu.Item>
+
               <Menu.Item key="signout">
-                <Link to={`/signin`}>
+                <Link to={`/`}>
                   <span className="isoMenuHolder" style={submenuColor}>
                     <i className="ion-log-out" />
                     <span className="nav-text">
