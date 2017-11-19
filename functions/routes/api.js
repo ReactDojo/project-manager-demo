@@ -36,40 +36,130 @@ const Router = express.Router();
 // Return JSON of all project data from db
 Router.get('/projects', function (req, res) {
   Project.find({}).exec(function (err, project) {
-    if (err) return res.send(err);
-    return res.send(project);
+    if (err) {
+      let message = {
+        success: false,
+        type: 'error',
+        message: 'Error obtaining projects data from API!',
+        description: err
+      }
+      return res.status(500).json(message);
+    } else {
+      return res.status(200).json(project);
+    }
   });
+});
+
+// Performs a POST of new project data and returns a success, or error message in JSON
+Router.post('/projects', function (req, res) {
+  let New = new Project({
+    title: req.body.title,
+    startdate: req.body.startdate,
+    enddate: req.body.enddate,
+    rateofpay: req.body.rateofpay,
+    status: req.body.status,
+    notes: req.body.notes,
+    avatar: req.body.avatar
+  });
+  New.save(function (err) {
+    if (err) {
+      let message = {
+        success: false,
+        type: 'error',
+        message: 'Error obtaining project data from API!',
+        description: err
+      }
+      res.status(500).json(message);
+    } else {
+      let message = {
+        success: true,
+        type: 'success',
+        message: 'Successfully created new project!',
+        description: ''
+      }
+      res.status(200).json(message);
+    }
+  })
 });
 
 // Return JSON of product data by :id
 Router.get('/project/:id', function (req, res) {
   Project.find({ "_id": req.params.id }).exec(function (err, project) {
-    if (err) return res.send(err);
-    return res.send(project);
+    if (err) {
+      let message = {
+        success: false,
+        type: 'error',
+        message: 'Error obtaining project data from API!',
+        description: err
+      }
+      return res.status(500).json(message);
+    } else {
+      return res.status(200).json(project);
+    }
   });
 });
 
-// Performs a POST of new project data and returns a success, or error message in JSON
-Router.post('/project/new', function (req, res) {
-  let New = new Project({
-    name: req.body.project_name,
-    description: req.body.project_description
-  });
-  New.save(function (err) {
+Router.put('/project/:id', function (req, res) {
+  Project.findById(req.params.id, function (err, project) {
     if (err) {
-      res.json({ message: err });
+      let message = {
+        success: false,
+        type: 'error',
+        message: 'Error locating project data!',
+        description: err
+      }
+      res.status(500).json(message);
     } else {
-      res.json({ message: 'Successful!' });
+      project.title = req.body.title || project.title;
+      project.avatar = req.body.avatar || project.avatar;
+      project.startdate = req.body.startdate || project.startdate;
+      project.enddate = req.body.enddate || project.enddate;
+      project.rateofpay = req.body.rateofpay || project.rateofpay;
+      project.status = req.body.status || project.status;
+      project.notes = req.body.notes || project.notes;
+      project.save((err, project) => {
+        if (err) {
+          let message = {
+            success: false,
+            type: 'error',
+            message: 'Error saving project data!',
+            description: err
+          }
+          res.status(500).json(message)
+        } else {
+          let message = {
+            success: true,
+            type: 'success',
+            message: 'Successfully updated project data!',
+            description: ''
+          }
+          res.status(200).json(message);
+        }
+      });
+    }
+  });
+});
+
+Router.delete('/project/:id', function (req, res) {
+  Project.findByIdAndRemove(req.params.id, function (err, project) {
+    if (err) {
+      let message = {
+        success: false,
+        type: 'error',
+        message: 'Error deleting project data!',
+        description: err
+      }
+      res.status(500).json(message);
+    } else {
+      let message = {
+        success: true,
+        type: 'success',
+        message: 'Project successfully deleted!',
+        description: ''
+      }
+      res.status(200).json(message);
     }
   })
-});
-
-Router.get('/project/:pid/tasks/', function (req, res) {
-
-});
-
-Router.post('/project/:pid/task/new', function (req, res) {
-
 });
 
 /*
@@ -78,14 +168,23 @@ Router.post('/project/:pid/task/new', function (req, res) {
 
 Router.get('/users', function (req, res) {
   User.find({}).exec(function (err, users) {
-    if (err) return res.send(err);
-    return res.send(users);
+    if (err) {
+      let message = {
+        success: false,
+        type: 'error',
+        message: 'Error getting data for users!',
+        description: err
+      }
+      return res.status(500).json(message);
+    } else {
+      return res.status(200).json(users);
+    }
   });
 });
 
 Router.post('/users', function (req, res) {
   let New = new User({
-    username: req.body.username, 
+    username: req.body.username,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     name: req.body.name,
@@ -98,36 +197,45 @@ Router.post('/users', function (req, res) {
   });
   New.save(function (err) {
     if (err) {
-      let message = { 
+      let message = {
         success: false,
         type: 'error',
         message: 'Error saving new user!',
         description: err
       }
-      res.json(message);
+      res.status(500).json(message);
     } else {
-      let message = { 
+      let message = {
         success: true,
         type: 'success',
         message: 'Successfully added new user!',
         description: ''
       }
-      res.json(message);
+      res.status(200).json(message);
     }
   })
 });
 
 Router.get('/user/:id', function (req, res) {
   User.find({ "_id": req.params.id }).exec(function (err, user) {
-    if (err) return res.send(err);
-    return res.send(user);
+    if (err) {
+      let message = {
+        success: false,
+        type: 'error',
+        message: 'Error obtaining user data from API!',
+        description: err
+      }
+      return res.status(500).json(message);
+    } else {
+      return res.status(200).json(user);
+    }
   });
 });
 
 Router.put('/user/:id', function (req, res) {
-  User.findById(req.params.id,  function (err, user) {
+  User.findById(req.params.id, function (err, user) {
     if (err) {
-      let message = { 
+      let message = {
         success: false,
         type: 'error',
         message: 'Error locating user data!',
@@ -146,7 +254,7 @@ Router.put('/user/:id', function (req, res) {
       user.note = req.body.note || user.note;
       user.save((err, user) => {
         if (err) {
-          let message = { 
+          let message = {
             success: false,
             type: 'error',
             message: 'Error saving user data!',
@@ -154,7 +262,7 @@ Router.put('/user/:id', function (req, res) {
           }
           res.status(500).json(message)
         } else {
-          let message = { 
+          let message = {
             success: true,
             type: 'success',
             message: 'Successfully updated user data!',
@@ -170,7 +278,7 @@ Router.put('/user/:id', function (req, res) {
 Router.delete('/user/:id', function (req, res) {
   User.findByIdAndRemove(req.params.id, function (err, user) {
     if (err) {
-      let message = { 
+      let message = {
         success: false,
         type: 'error',
         message: 'Error deleting user data!',
@@ -178,7 +286,7 @@ Router.delete('/user/:id', function (req, res) {
       }
       res.status(500).json(message);
     } else {
-      let message = { 
+      let message = {
         success: true,
         type: 'success',
         message: 'User successfully deleted!',
@@ -195,8 +303,17 @@ Router.delete('/user/:id', function (req, res) {
 
 Router.get('/tasks', function (req, res) {
   Task.find({}).exec(function (err, tasks) {
-    if (err) return res.send(err);
-    return res.send(tasks);
+    if (err) {
+      let message = {
+        success: false,
+        type: 'error',
+        message: 'Error obtaining tasks from API!',
+        description: err
+      }
+      return res.status(500).json(message);
+    } else {
+      return res.status(200).json(tasks);
+    }
   });
 });
 
@@ -204,56 +321,58 @@ Router.post('/tasks', function (req, res) {
   let New = new Task({ task: req.body.task });
   New.save(function (err) {
     if (err) {
-      let message = { 
+      let message = {
         success: false,
         type: 'error',
         message: 'Error adding new task!',
         description: err
       }
-      res.json(message);
+      res.status(500).json(message);
     } else {
-      let message = { 
+      let message = {
         success: true,
         type: 'success',
         message: 'Successfully added new task!',
         description: ''
       }
-      res.json(message);
+      res.status(200).json(message);
     }
   })
 });
 
 Router.put('/task/:id', function (req, res) {
-  Task.findById(req.params.id,  function (err, task) {
+  Task.findById(req.params.id, function (err, task) {
     if (err) {
-      let message = { 
+      let message = {
         success: false,
         type: 'error',
-        message: 'Error deleting task!',
+        message: 'Error locating task!',
         description: err
       }
-      res.json(message);
+      res.status(500).json(message);
     } else {
       task.task = req.body.task || task.task;
       task.createTime = req.body.createTime || task.createTime;
       task.color = req.body.color || task.color;
       task.completed = req.body.completed || task.completed;
       task.save((err, task) => {
-        let message = { 
-          success: true,
-          type: 'success',
-          message: 'Successfully updated task!',
-          description: ''
-        }
         if (err) {
-          message = { 
+          message = {
             success: false,
             type: 'error',
             message: 'Error updating task!',
             description: err
           }
+          res.status(500).json(message);
+        } else {
+          let message = {
+            success: true,
+            type: 'success',
+            message: 'Successfully updated task!',
+            description: ''
+          }
+          res.status(200).json(message);
         }
-        res.json(message);
       });
     }
   });
@@ -262,21 +381,21 @@ Router.put('/task/:id', function (req, res) {
 Router.delete('/task/:id', function (req, res) {
   Task.findByIdAndRemove(req.params.id, function (err, task) {
     if (err) {
-      let message = { 
+      let message = {
         success: false,
         type: 'error',
         message: 'Error deleting task!',
         description: err
       }
-      res.json(message);
+      res.status(500).json(message);
     } else {
-      let message = { 
+      let message = {
         success: true,
         type: 'success',
         message: 'Task successfully deleted!',
         description: ''
       }
-      res.json(message);
+      res.status(200).json(message);
     }
   });
 });
