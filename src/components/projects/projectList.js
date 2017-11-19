@@ -4,11 +4,12 @@ import { InputSearch } from '../uielements/input';
 import DeleteButton from './deleteButton';
 import { PropTypes } from 'prop-types';
 import { ProjectListWrapper } from './projectList.style';
+import Spin from '../../containers/Feedback/Spin/spin.style';
 
 function filterProjects(projects, search) {
   search = search.toUpperCase();
   return search
-    ? projects.filter(project => project.name.toUpperCase().includes(search))
+    ? projects.filter(project => project.title.toUpperCase().includes(search))
     : projects;
 }
 
@@ -18,16 +19,17 @@ export default class ProjectList extends Component {
     this.singleProject = this.singleProject.bind(this);
     this.onChange = this.onChange.bind(this);
     this.state = {
-      search: ''
+      search: '',
+      loading: true
     };
   }
   singleProject(project) {
-    const { seectedId, deleteProject, changeProject } = this.props;
-    const activeClass = seectedId === project.id ? 'active' : '';
-    const onChange = () => changeProject(project.id);
+    const { selectedId, deleteProject, changeProject } = this.props;
+    const activeClass = selectedId === project._id ? 'active' : '';
+    const onChange = () => changeProject(project._id);
     return (
       <div
-        key={project.id}
+        key={project._id}
         className={`${activeClass} isoSingleProject`}
         onClick={onChange}
       >
@@ -35,7 +37,7 @@ export default class ProjectList extends Component {
           {project.avatar ? <img alt="#" src={project.avatar} /> : ''}
         </div>
         <div className="isoProjectName">
-          <h3>{project.name ? project.name : 'No Name'}</h3>
+          <h3>{project.title ? project.title : 'Untitled Project'}</h3>
         </div>
         <DeleteButton deleteProject={deleteProject} project={project} />
       </div>
@@ -62,10 +64,14 @@ export default class ProjectList extends Component {
             {projects.map(project => this.singleProject(project))}
           </div>
         ) : (
-          <span className="isoNoResultMsg">
-            {<IntlMessages id="Component.projects.noOption" />}
-          </span>
-        )}
+            <span className="isoNoResultMsg">
+              {this.props.loading ? (
+                <div><Spin size="small" />&nbsp;&nbsp;&nbsp;Loading..</div>
+              ) : (
+                  <IntlMessages id="Component.projects.noOption" />
+                )}
+            </span>
+          )}
       </ProjectListWrapper>
     );
   }
