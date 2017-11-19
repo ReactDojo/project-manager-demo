@@ -4,6 +4,7 @@ import { InputSearch } from '../uielements/input';
 import DeleteButton from './deleteButton';
 import { PropTypes } from 'prop-types';
 import { UserListWrapper } from './userList.style';
+import Spin from '../../containers/Feedback/Spin/spin.style';
 
 function filterUsers(users, search) {
   search = search.toUpperCase();
@@ -62,10 +63,14 @@ export default class UserList extends Component {
             {users.map(user => this.singleUser(user))}
           </div>
         ) : (
-          <span className="isoNoResultMsg">
-            {<IntlMessages id="Component.users.noOption" />}
-          </span>
-        )}
+            <span className="isoNoResultMsg">
+              {this.props.loading ? (
+                <div><Spin size="small" />&nbsp;&nbsp;&nbsp;Loading..</div>
+              ) : (
+                <IntlMessages id="Component.users.noOption" />
+              )}
+            </span>
+          )}
       </UserListWrapper>
     );
   }
