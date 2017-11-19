@@ -7,8 +7,8 @@ const siteConfig = {
 };
 
 const themeConfig = {
-  topbar: 'themedefault',
-  sidebar: 'themedefault',
+  topbar: 'theme6',
+  sidebar: 'theme6',
   layout: 'themedefault',
   theme: 'themedefault',
 };
