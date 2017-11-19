@@ -11,6 +11,8 @@ import { otherAttributes } from './getData';
 import IntlMessages from '../../components/utility/intlMessages';
 import { UsersWrapper } from './users.style';
 import apiUrl from '../../config'
+import notification from '../../components/notification';
+
 
 const {
   changeUser,
@@ -29,9 +31,12 @@ class Users extends Component {
     this.updateUserDataOnServer = this.updateUserDataOnServer.bind(this);
     this.addUserDataOnServer = this.addUserDataOnServer.bind(this);
     this.deleteUserDataOnServer = this.deleteUserDataOnServer.bind(this);
+    this.state = {
+      loading: true
+    }
   }
 
-  loadUsersFromServer() {
+  loadUsersFromServer(cb) {
     fetch(`${apiUrl}/users`)
       .then(response => {
         if (!response.ok) {
@@ -41,7 +46,7 @@ class Users extends Component {
       })
       .then(d => d.json())
       .then(users => {
-        this.props.setUsers(users);
+        cb(users);
       });
   }
 
@@ -55,12 +60,14 @@ class Users extends Component {
       body: JSON.stringify(user)
     }).then(response => {
       if (!response.ok) {
-        console.log(response);
+        notification('error', 'Error updating user', '');
+        //console.log(response);
       }
       return response
     }).then(d => d.json())
       .then(users => {
-        console.log(users);
+        notification('success', 'Successfully updated user!', '');
+        //console.log(users);
       });
   }
 
@@ -73,12 +80,14 @@ class Users extends Component {
       headers: myHeaders
     }).then(response => {
       if (!response.ok) {
-        console.log(response);
+        notification('error', 'Error deleting user!', '');
+        //console.log(response);
       }
       return response
     }).then(d => d.json())
       .then(users => {
-        console.log(users);
+        notification('success', 'User deleted successfully!', '');
+        //console.log(users);
       });
   }
 
@@ -92,17 +101,22 @@ class Users extends Component {
       body: JSON.stringify(user)
     }).then(response => {
       if (!response.ok) {
-        console.log(response);
+        notification('error', 'Error adding user!', '');
+        //console.log(response);
       }
       return response
     }).then(d => d.json())
       .then(users => {
-        console.log(users);
+        notification('success', 'User added successfully!', '');
+        //console.log(users);
       });
   }
 
   componentDidMount() {
-    this.loadUsersFromServer();
+    this.loadUsersFromServer((users) => {
+      this.props.setUsers(users);
+      this.setState({ loading: false });
+    });
     //setInterval(this.loadUsersFromServer, 2000);
   }
 
@@ -124,6 +138,7 @@ class Users extends Component {
       if (editView) {
         if (selectedUser._id instanceof Date) {
           this.addUserDataOnServer(selectedUser);
+
         } else {
           this.updateUserDataOnServer(selectedUser);
         }
@@ -137,6 +152,7 @@ class Users extends Component {
       >
         <Sider width="300" className="isoUserListBar">
           <UserList
+            loading={this.state.loading}
             users={users}
             selectedId={selectedId}
             changeUser={changeUser}
