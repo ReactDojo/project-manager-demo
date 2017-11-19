@@ -9,6 +9,8 @@ import EditProjectView from '../../components/projects/editView';
 import DeleteButton from '../../components/projects/deleteButton';
 import IntlMessages from '../../components/utility/intlMessages';
 import { ProjectsWrapper } from './projects.style';
+import notification from '../../components/notification';
+import { addProjectToDB, updateProjectInDB, getProjectsFromDB } from './dataHelper';
 
 const {
   changeProject,
@@ -16,10 +18,23 @@ const {
   editProject,
   deleteProject,
   viewChange,
+  setProjects
 } = projectAction;
 
 const { Sider, Content } = Layout;
 class Projects extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true
+    }
+  }
+  componentDidMount() {
+    getProjectsFromDB((projects) => {
+      this.props.setProjects(projects);
+      this.setState({ loading: false });
+    });
+  }
   render() {
     const {
       projects,
@@ -29,12 +44,27 @@ class Projects extends Component {
       addProject,
       editProject,
       deleteProject,
-      viewChange,
+      viewChange
     } = this.props;
     const selectedProject = selectedId
-      ? projects.filter(project => project.id === selectedId)[0]
+      ? projects.filter(project => project._id === selectedId)[0]
       : null;
-    const onVIewChange = () => viewChange(!editView);
+    const onViewChange = () => {
+      if (editView) {
+        if (selectedProject._id instanceof Date) {
+          // Add Project
+          addProjectToDB(selectedProject, (response) => {
+            notification(response.type, response.message, response.description);
+          });
+        } else {
+          // Update Project
+          updateProjectInDB(selectedProject, (response) => {
+            notification(response.type, response.message, response.description);
+          });
+        }
+      }
+      viewChange(!editView);
+    }
     return (
       <ProjectsWrapper
         className="isomorphicProjects"
@@ -42,6 +72,7 @@ class Projects extends Component {
       >
         <Sider width="300" className="isoProjectListBar">
           <ProjectList
+            loading={this.state.loading}
             projects={projects}
             selectedId={selectedId}
             changeProject={changeProject}
@@ -51,34 +82,16 @@ class Projects extends Component {
         <Layout className="isoProjectBoxWrapper">
           {selectedProject
             ? <Content className="isoProjectBox">
-                <div className="isoProjectControl">
-                  <Button type="button" onClick={onVIewChange}>
-                    {editView
-                      ? <Icon type="check" />
-                      : <Icon type="edit" />}{' '}
-                  </Button>
-                  <DeleteButton
-                    deleteProject={deleteProject}
-                    project={selectedProject}
-                  />
-                  <Button
-                    type="primary"
-                    onClick={addProject}
-                    className="isoAddProjectBtn"
-                  >
-                    <IntlMessages id="projectlist.addNewProject" />
-                  </Button>
-                </div>
-                {editView
-                  ? <EditProjectView
-                      project={selectedProject}
-                      editProject={editProject}
-                    />
-                  : <SingleProjectView
-                      project={selectedProject}
-                    />}
-              </Content>
-            : <div className="isoProjectControl">
+              <div className="isoProjectControl">
+                <Button type="button" onClick={onViewChange}>
+                  {editView
+                    ? <Icon type="check" />
+                    : <Icon type="edit" />}{' '}
+                </Button>
+                <DeleteButton
+                  deleteProject={deleteProject}
+                  project={selectedProject}
+                />
                 <Button
                   type="primary"
                   onClick={addProject}
@@ -86,7 +99,25 @@ class Projects extends Component {
                 >
                   <IntlMessages id="projectlist.addNewProject" />
                 </Button>
-              </div>}
+              </div>
+              {editView
+                ? <EditProjectView
+                  project={selectedProject}
+                  editProject={editProject}
+                />
+                : <SingleProjectView
+                  project={selectedProject}
+                />}
+            </Content>
+            : <div className="isoProjectControl">
+              <Button
+                type="primary"
+                onClick={addProject}
+                className="isoAddProjectBtn"
+              >
+                <IntlMessages id="projectlist.addNewProject" />
+              </Button>
+            </div>}
         </Layout>
       </ProjectsWrapper>
     );
@@ -107,4 +138,5 @@ export default connect(mapStateToProps, {
   editProject,
   deleteProject,
   viewChange,
+  setProjects
 })(Projects);
