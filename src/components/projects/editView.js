@@ -4,7 +4,6 @@ import Input from '../uielements/input';
 import Upload from '../uielements/upload';
 import notification from '../notification';
 import { ProjectCardWrapper } from './projectCard.style';
-import DatePicker from '../uielements/datePicker.js';
 import './upload.css';
 
 function beforeUpload(file) {
@@ -24,15 +23,15 @@ function beforeUpload(file) {
 export default class editProjectView extends Component {
   render() {
     const { project } = this.props;
-    const name = project.name ? project.name : 'Untitled Project';
+    const title = project.title ? project.title : 'Untitled Project';
     const extraInfos = [];
     const details = [
-      { value: 'name', title: 'Title' },
+      { value: 'title', title: 'Title' },
       { value: 'startdate', title: 'Start Date' },
       { value: 'enddate', title: 'End Date' },
-      { value: 'rate', title: 'Pay Rate' },
+      { value: 'rateofpay', title: 'Pay Rate' },
       { value: 'status', title: 'Status' },
-      { value: 'note', title: 'Notes' },
+      { value: 'notes', title: 'Notes' },
     ];
     [...details].forEach(attribute => {
       const value = project[attribute.value];
@@ -40,7 +39,7 @@ export default class editProjectView extends Component {
         project[attribute.value] = event.target.value;
         this.props.editProject(project);
       };
-      if (attribute.value === 'note') {
+      if (attribute.value === 'notes') {
         extraInfos.push(
           <div className="isoProjectCardInfos" key={attribute.value}>
             <p className="isoInfoLabel">{`${attribute.title}`}</p>
@@ -51,13 +50,6 @@ export default class editProjectView extends Component {
               rows={5}
               onChange={event => editProject(event)}
             />
-          </div>
-        );
-      } else if (attribute.value === 'startdate' || attribute.value === 'enddate') {
-        extraInfos.push(
-          <div className="isoProjectCardInfos" key={attribute.value}>
-            <p className="isoInfoLabel">{`${attribute.title}`}</p>
-            <DatePicker />
           </div>
         );
       } else {
@@ -91,7 +83,7 @@ export default class editProjectView extends Component {
             </Upload>
           </div>
           <h1 className="isoPersonName">
-            {name}
+            {title}
           </h1>
         </div>
         <div className="isoProjectInfoWrapper">
