@@ -47,107 +47,45 @@ export default class IsoWidgets extends Component {
     return (
       <div style={wisgetPageStyle}>
         <Row style={rowStyle} gutter={0} justify="start">
-          <Col md={6} sm={12} xs={24} style={colStyle}>
+          <Col md={8} sm={16} xs={24} style={colStyle}>
             <IsoWidgetsWrapper>
               {/* Sticker Widget */}
               <StickerWidget
-                number={<IntlMessages id="widget.stickerwidget1.number" />}
-                text={<IntlMessages id="widget.stickerwidget1.text" />}
-                icon="ion-email-unread"
+                number="4"
+                text="Active Projects"
+                icon="ion-clipboard"
                 fontColor="#ffffff"
                 bgColor="#7266BA"
               />
             </IsoWidgetsWrapper>
           </Col>
 
-          <Col md={6} sm={12} xs={24} style={colStyle}>
+          <Col md={8} sm={16} xs={24} style={colStyle}>
             <IsoWidgetsWrapper>
               {/* Sticker Widget */}
               <StickerWidget
-                number={<IntlMessages id="widget.stickerwidget1.number" />}
-                text={<IntlMessages id="widget.stickerwidget2.text" />}
-                icon="ion-android-camera"
+                number="123"
+                text="Completed Tasks"
+                icon="ion-android-list"
                 fontColor="#ffffff"
                 bgColor="#42A5F6"
               />
             </IsoWidgetsWrapper>
           </Col>
 
-          <Col md={6} sm={12} xs={24} style={colStyle}>
+          <Col md={8} sm={16} xs={24} style={colStyle}>
             <IsoWidgetsWrapper>
               {/* Sticker Widget */}
               <StickerWidget
-                number={<IntlMessages id="widget.stickerwidget1.number" />}
-                text={<IntlMessages id="widget.stickerwidget3.text" />}
-                icon="ion-chatbubbles"
+                number="15"
+                text="Total Users"
+                icon="ion-android-person-add"
                 fontColor="#ffffff"
                 bgColor="#7ED320"
               />
             </IsoWidgetsWrapper>
           </Col>
 
-          <Col md={6} sm={12} xs={24} style={colStyle}>
-            <IsoWidgetsWrapper>
-              {/* Sticker Widget */}
-              <StickerWidget
-                number={<IntlMessages id="widget.stickerwidget1.number" />}
-                text={<IntlMessages id="widget.stickerwidget4.text" />}
-                icon="ion-android-cart"
-                fontColor="#ffffff"
-                bgColor="#F75D81"
-              />
-            </IsoWidgetsWrapper>
-          </Col>
-        </Row>
-
-        <Row style={rowStyle} gutter={0} justify="start">
-          <Col md={6} sm={12} xs={24} style={colStyle}>
-            <IsoWidgetsWrapper>
-              {/* Sale Widget */}
-              <SaleWidget
-                label={<IntlMessages id="widget.salewidget1.label" />}
-                price={<IntlMessages id="widget.salewidget1.price" />}
-                details={<IntlMessages id="widget.salewidget1.details" />}
-                fontColor="#F75D81"
-              />
-            </IsoWidgetsWrapper>
-          </Col>
-
-          <Col md={6} sm={12} xs={24} style={colStyle}>
-            <IsoWidgetsWrapper>
-              {/* Sale Widget */}
-              <SaleWidget
-                label={<IntlMessages id="widget.salewidget2.label" />}
-                price={<IntlMessages id="widget.salewidget2.price" />}
-                details={<IntlMessages id="widget.salewidget2.details" />}
-                fontColor="#F75D81"
-              />
-            </IsoWidgetsWrapper>
-          </Col>
-
-          <Col md={6} sm={12} xs={24} style={colStyle}>
-            <IsoWidgetsWrapper>
-              {/* Sale Widget */}
-              <SaleWidget
-                label={<IntlMessages id="widget.salewidget3.label" />}
-                price={<IntlMessages id="widget.salewidget3.price" />}
-                details={<IntlMessages id="widget.salewidget3.details" />}
-                fontColor="#F75D81"
-              />
-            </IsoWidgetsWrapper>
-          </Col>
-
-          <Col md={6} sm={12} xs={24} style={colStyle}>
-            <IsoWidgetsWrapper>
-              {/* Sale Widget */}
-              <SaleWidget
-                label={<IntlMessages id="widget.salewidget4.label" />}
-                price={<IntlMessages id="widget.salewidget4.price" />}
-                details={<IntlMessages id="widget.salewidget4.details" />}
-                fontColor="#F75D81"
-              />
-            </IsoWidgetsWrapper>
-          </Col>
         </Row>
 
         <Row style={rowStyle} gutter={0} justify="start">
