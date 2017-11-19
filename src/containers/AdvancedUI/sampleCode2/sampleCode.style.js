@@ -7,7 +7,7 @@ const SampleCodeEditor = props => <CodeMirrors {...props} />;
 const SampleCode = styled(SampleCodeEditor)`
   .CodeMirror {
     font-family: monospace;
-    height: 300px;
+    height: 350px;
     position: relative;
     overflow: hidden;
     pre {
