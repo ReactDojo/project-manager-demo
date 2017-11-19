@@ -1,4 +1,5 @@
 {
+  "sidebar.api": "View API",
   "sidebar.dashboard": "Dashboard",
   "sidebar.projects": "Manage Projects",
   "sidebar.projects-add": "Add New Project",
@@ -8,7 +9,7 @@
   "sidebar.tasks-viewall": "View All Tasks",
   "sidebar.users": "Manage Users",
   "sidebar.samplecode1": "View React Sample",
-  "sidebar.samplecode2": "View NodeJS Sample",
+  "sidebar.samplecode2": "View Node Sample",
   "sidebar.signout": "Log out",
   "sidebar.email": "Email",
   "sidebar.ecommerce": "Ecommerce",
