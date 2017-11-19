@@ -26,12 +26,14 @@ class Task extends Component {
     super(props);
     this.state = {
       newTask: '',
+      loading: true
     };
   }
 
   componentDidMount() {
     getTasksFromDB((tasks) => {
       this.props.setTasks(tasks);
+      this.setState({ loading: false });
     });
   }
 
@@ -74,6 +76,7 @@ class Task extends Component {
           </Header>
           <Content className="isoTaskContentBody">
             <TaskList
+              loading={this.state.loading}
               tasks={tasks}
               deleteTask={deleteTask}
               edittask={edittask}

@@ -10,7 +10,7 @@ import {
 } from '../../components/';
 import { TaskListWrapper } from './task.style';
 import { updateTaskInDB, deleteTaskFromDB } from './dataHelper';
-
+import Spin from '../../containers/Feedback/Spin/spin.style';
 
 function filterTasks(tasks, search) {
   const selectedTasks =
@@ -84,6 +84,11 @@ export default class TaskList extends Component {
   render() {
     const { search } = this.state;
     const { selectedTasks } = filterTasks(this.props.tasks, search);
+    const style = {
+      textAlign: 'center',
+      background: '#f1f3f6',
+      padding: '30px 50px'
+    }
     return (
       <TaskListWrapper className="isoTaskContent">
         <div className="isoTaskStatusTab">
@@ -101,9 +106,13 @@ export default class TaskList extends Component {
         <div className="isoTaskListWrapper">
           {selectedTasks.length > 0 ? (
             selectedTasks.map(note => this.singleTask(note))
-          ) : (
-            <h3 className="isoNoTaskFound">No task found</h3>
-          )}
+          ) : 
+            this.props.loading ? (
+              <div style={style}><Spin />&nbsp;&nbsp;&nbsp;Loading..</div>
+            ) : (
+              <h3 className="isoNoTaskFound">No task found</h3>
+            )
+          }
         </div>
 
       </TaskListWrapper>
