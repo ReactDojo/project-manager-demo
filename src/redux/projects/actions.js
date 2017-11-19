@@ -9,6 +9,7 @@ const projectActions = {
   EDIT_PROJECT: 'EDIT_PROJECT',
   DELETE__PROJECT: 'DELETE__PROJECT',
   CHANGE_PROJECT: 'CHANGE_PROJECT',
+  SET_PROJECTS: 'SET_PROJECTS',
   EDIT_VIEW: 'EDIT_VIEW',
   changeProject: (id) => ({
     type: projectActions.CHANGE_PROJECT,
@@ -16,22 +17,20 @@ const projectActions = {
   }),
   addProject: () => {
     const newProject = {
-      id: new Date(),
-      firstName: '',
+      _id: new Date(),
+      title: '',
       avatar: 'https://www.naplesgarden.org/wp-content/themes/naples_botanical/img/notfound.jpg',
-      LastName: '',
-      mobile: '',
-      home: '',
-      name: '',
-      company: '',
-      work: '',
-      note: '',
+      startdate: '',
+      enddate: '',
+      rateofpay: '',
+      status: '',
+      notes: ''
     };
     return (dispatch, getState) => {
       dispatch({
         type: projectActions.ADD_PROJECT,
         projects: [...getState().Projects.get('projects'), newProject],
-        selectedId: newProject.id,
+        selectedId: newProject._id,
       });
     };
   },
@@ -40,7 +39,7 @@ const projectActions = {
       const projects = getState().Projects.get('projects');
       const newProjects = [];
       projects.forEach(project => {
-        if (project.id === newProject.id) {
+        if (project._id === newProject._id) {
           newProjects.push(newProject);
         } else {
           newProjects.push(project);
@@ -58,7 +57,7 @@ const projectActions = {
       const selectedId = getState().Projects.get('selectedId');
       const newProjects = [];
       projects.forEach(project => {
-        if (project.id === id) {
+        if (project._id === id) {
         } else {
           newProjects.push(project);
         }
@@ -74,5 +73,13 @@ const projectActions = {
     type: projectActions.EDIT_VIEW,
     view,
   }),
+  setProjects: (projects) => {
+    return (dispatch, getState) => {
+      dispatch({
+        type: projectActions.SET_PROJECTS,
+        projects
+      });
+    }
+  }
 };
 export default projectActions;
