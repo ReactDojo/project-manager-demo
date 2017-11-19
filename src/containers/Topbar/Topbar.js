@@ -53,12 +53,6 @@ class Topbar extends Component {
             >
               <TopbarMessage />
             </li>
-            <li
-              onClick={() => this.setState({ selectedItem: 'user' })}
-              className="isoUser"
-            >
-              <TopbarUser />
-            </li>
           </ul>
         </Header>
       </TopbarWrapper>
