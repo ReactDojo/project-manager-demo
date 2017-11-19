@@ -1,9 +1,9 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a sample using React Dojo API.",
+        "description": "This is a sample of the React Dojo API using Swagger UI. <br><br>Please feel free to test the public API using the forms below.",
         "version": "1.0.0",
-        "title": "Swagger React Dojo",
+        "title": "React Dojo API Demo",
         "contact": {
             "email": "reactdojodemo@gmail.com"
         }
@@ -20,16 +20,6 @@
     ],
     "host": "us-central1-react-dojo-demo.cloudfunctions.net/app",
     "basePath": "",
-    "tags": [
-        {
-            "name": "Projects",
-            "description": "Everything about your Projects"
-        },
-        {
-            "name": "Tasks",
-            "description": "Access to Project Tasks"
-        }
-    ],
     "schemes": [
         "https"
     ],
@@ -39,7 +29,7 @@
                 "tags": [
                     "Projects"
                 ],
-                "summary": "Get a list of all available projects",
+                "summary": "Get all available project details",
                 "description": "",
                 "operationId": "",
                 "consumes": [
@@ -52,59 +42,733 @@
                 "responses": {
                     "200": {
                         "description": "Successful Operation"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Create new project",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of Project",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "startdate",
+                        "in": "path",
+                        "description": "Start Date of Project",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "enddate",
+                        "in": "path",
+                        "description": "End Date of Project",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "rateofpay",
+                        "in": "path",
+                        "description": "Pay Rate",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "path",
+                        "description": "Status of Project",
+                        "required": true,
+                        "type": "string"
+                    },
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/project/{projectId}": {
+            "get": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Get details about a specific project",
+                "description": "Return data corresponding to a specific project",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "ID of project to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Update details about a specific project",
+                "description": "Returns a success or error message regarding update status",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "ID of project to update",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Projects"
+                ],
+                "summary": "Delete data for a specific project",
+                "description": "Returns a success or error message regarding update status",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "ID of project to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/tasks": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Get all available task data",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Create new task",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "task",
+                        "in": "path",
+                        "description": "Description of Task",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "createTime",
+                        "in": "path",
+                        "description": "Time Task was created",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "color",
+                        "in": "path",
+                        "description": "Color of Task",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "completed",
+                        "in": "path",
+                        "description": "Completion Status of Task",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/task/{taskId}": {
+            "get": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Get details about a specific task",
+                "description": "Return data corresponding to a specific task",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "in": "path",
+                        "description": "Task ID of Task to query",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Update details about a specific task",
+                "description": "Returns a success or error message regarding update status",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "in": "path",
+                        "description": "Task ID of Task to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "task",
+                        "in": "path",
+                        "description": "Description of Task",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "createTime",
+                        "in": "path",
+                        "description": "Time Task was created",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "color",
+                        "in": "path",
+                        "description": "Color of Task",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "completed",
+                        "in": "path",
+                        "description": "Completion Status of Task",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "Delete data for a specific task",
+                "description": "Returns a success or error message regarding delete status",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "taskId",
+                        "in": "path",
+                        "description": "Task ID of Task to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get all available user data",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create new user",
+                "description": "",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "firstName",
+                        "in": "path",
+                        "description": "First Name of User",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lastName",
+                        "in": "path",
+                        "description": "Last Name of User",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Full Name of User",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "avatar",
+                        "in": "path",
+                        "description": "Avatar Image for User",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "mobile",
+                        "in": "path",
+                        "description": "Mobile Phone Number for User",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "home",
+                        "in": "path",
+                        "description": "Home Phone Number of User",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "company",
+                        "in": "path",
+                        "description": "Company Name of User",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "work",
+                        "in": "path",
+                        "description": "Work Phone Number for User",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "note",
+                        "in": "path",
+                        "description": "Notes for User",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            }
+        },
+        "/user/{userId}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get details about a specific user",
+                "description": "Return data corresponding to a specific user",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "User ID of User to query",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update details about a specific user",
+                "description": "Returns a success or error message regarding update status",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "User ID of User to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "firstName",
+                        "in": "path",
+                        "description": "First Name of User",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lastName",
+                        "in": "path",
+                        "description": "Last Name of User",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Full Name of User",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "avatar",
+                        "in": "path",
+                        "description": "Avatar Image for User",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "mobile",
+                        "in": "path",
+                        "description": "Mobile Phone Number for User",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "home",
+                        "in": "path",
+                        "description": "Home Phone Number of User",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "company",
+                        "in": "path",
+                        "description": "Company Name of User",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "work",
+                        "in": "path",
+                        "description": "Work Phone Number for User",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "note",
+                        "in": "path",
+                        "description": "Notes for User",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation"
+                    },
+                    "500": {
+                        "description": "Server Error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete data for a specific user",
+                "description": "Returns a success or error message regarding delete status",
+                "operationId": "",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "User ID of User to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Operation"
+                    },
+                    "500": {
+                        "description": "Server Error"
                     }
                 }
             }
         }
     },
     "definitions": {
-        "Project": {
+        "Projects": {
             "type": "object",
             "properties": {
-                "id": {
-                    "type": "integer",
-                    "format": "int64"
+                "projectId": {
+                    "type": "ObjectID"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "startdate": {
+                    "type": "date"
+                },
+                "enddate": {
+                    "type": "date"
+                },
+                "rateofpay": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "notes": {
+                    "type": "string"
+                }
+            }
+        },
+        "Tasks": {
+            "type": "object",
+            "properties": {
+                "taskId": {
+                    "type": "ObjectID"
+                },
+                "task": {
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "date"
+                },
+                "color": {
+                    "type": "integer"
+                },
+                "completed": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "Users": {
+            "type": "object",
+            "properties": {
+                "userId": {
+                    "type": "ObjectID"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
                 },
                 "name": {
                     "type": "string"
                 },
-                "quantity": {
-                    "type": "integer",
-                    "format": "int32"
+                "avatar": {
+                    "type": "string"
                 },
-                "shipDate": {
-                    "type": "string",
-                    "format": "date-time"
+                "mobile": {
+                    "type": "string"
                 },
-                "status": {
-                    "type": "string",
-                    "description": "Order Status",
-                    "enum": [
-                        "placed",
-                        "approved",
-                        "delivered"
-                    ]
+                "home": {
+                    "type": "string"
                 },
-                "complete": {
-                    "type": "boolean",
-                    "default": false
+                "work": {
+                    "type": "string"
+                },
+                "company": {
+                    "type": "string"
+                },
+                "note": {
+                    "type": "string"
                 }
-            },
-            "xml": {
-                "name": "Order"
             }
         },
-        "APIResponse": {
+        "API Response": {
             "type": "object",
             "properties": {
-                "code": {
-                    "type": "integer",
-                    "format": "int32"
+                "success": {
+                    "type": "boolean"
                 },
                 "type": {
                     "type": "string"
                 },
                 "message": {
+                    "type": "string"
+                },
+                "description": {
                     "type": "string"
                 }
             }

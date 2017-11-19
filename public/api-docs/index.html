@@ -3,8 +3,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Swagger UI</title>
+  <title>React Dojo API Demo</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet" async="">
   <link rel="stylesheet" type="text/css" href="./swagger-ui.css" >
   <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32" />
   <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16" />
@@ -25,6 +26,32 @@
     body {
       margin:0;
       background: #fafafa;
+    }
+    .base-url, .url, .download-url-wrapper {
+      display: none !important;
+    }
+
+    .topbar {
+      background: #4670a2 !important;
+      height: 70px
+    }
+
+    .topbar > .wrapper::before {
+      content: 'REACTDOJO' !important;
+      font-size: 21px;
+      font-weight: 300;
+      font-family: 'Roboto', sans-serif;
+      line-height: 50px;
+      color: #F9F9F9;
+      letter-spacing: 3px;
+    }
+
+    .topbar-wrapper {
+      display: none !important;
+    }
+
+    .main > .title > small {
+      display: none !important;
     }
   </style>
 </head>
