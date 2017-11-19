@@ -26,6 +26,8 @@ export default function projectReducer(state = initState, action) {
         .set("selectedId", action.selectedId);
     case projectActions.EDIT_VIEW:
       return state.set("editView", action.view);
+    case projectActions.SET_PROJECTS:
+      return state.set("projects", action.projects);
     default:
       return state;
   }
