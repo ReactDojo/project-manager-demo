@@ -20,28 +20,6 @@ const selectOptions = [
     title: 'Tab Size',
     options: ['2', '4', '6', '8'],
     value: 2
-  },
-  {
-    id: 'mode',
-    title: 'Language',
-    options: ['javascript', 'xml', 'markdown', 'php', 'python', 'ruby'],
-    value: 'javascript'
-  },
-  {
-    id: 'theme',
-    title: 'Select themes',
-    options: [
-      'default',
-      'zenburn',
-      'solarized',
-      'rubyblue',
-      'paraiso-dark',
-      'midnight',
-      'material',
-      'hopscotch',
-      'twilight'
-    ],
-    value: 'zenburn'
   }
 ];
 
@@ -62,7 +40,37 @@ const defaultValues = {
   app.use('/', require('./routes/api'));
   
   // Export functions as app to Firebase
-  exports.app = functions.https.onRequest(app);`
+  exports.app = functions.https.onRequest(app);`,
+  routing: `// Import path library
+  const path = require('path');
+  
+  // Import .env variables
+  require('dotenv').config({
+    path: path.join(__dirname, '../.env')
+  });
+  
+  // Import Express library
+  const express = require('express');
+  // Import MongoDB library
+  const MongoDB = require('mongodb');
+  // Import Mongoose ODM library
+  const mongoose = require('mongoose');
+  // Connect to MongoDB via Mongoose
+  mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true });
+  // Configure Mongoose to inherit from global Promise 
+  mongoose.Promise = global.Promise;
+  // Set debug flag true / false to toggle console logs
+  mongoose.set('debug', true);
+  // Assign the Mongoose connection resource
+  const db = mongoose.connection;
+  
+  // Import Schema files
+  const Project = require('../schema/Project');
+  const Task = require('../schema/Task');
+  const User = require('../schema/User');
+  
+  // Initialize Express Router
+  const Router = express.Router();`
 };
 
 export { switchOptions, selectOptions, defaultValues };
