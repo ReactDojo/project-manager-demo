@@ -28,7 +28,7 @@ export default class extends Component {
         readOnly: false,
         tabSize: 4,
         mode: 'javascript',
-        theme: 'zenburn',
+        theme: 'midnight',
       },
     };
   }
@@ -83,14 +83,48 @@ export default class extends Component {
         <PageHeader>React Sample Code</PageHeader>
         <Row style={rowStyle} gutter={gutter} justify="start">
           <Col md={24} sm={24} xs={24} style={colStyle}>
-            <Box title="Basic Example">
+            <Box title="Container Example">
               <ContentHolder>
                 <SampleCodeToolbar className="isoOptionWrapper">
                   {this.toggleOptions()}
                   {this.selctOptions()}
                 </SampleCodeToolbar>
                 <SampleCode
-                  value={this.state.basic}
+                  value={this.state.container}
+                  onChange={value => this.updateCode('basic', value)}
+                  options={this.state.basicOptions}
+                />
+              </ContentHolder>
+            </Box>
+          </Col>
+        </Row>
+        <Row style={rowStyle} gutter={gutter} justify="start">
+          <Col md={24} sm={24} xs={24} style={colStyle}>
+            <Box title="Component Example">
+              <ContentHolder>
+                <SampleCodeToolbar className="isoOptionWrapper">
+                  {this.toggleOptions()}
+                  {this.selctOptions()}
+                </SampleCodeToolbar>
+                <SampleCode
+                  value={this.state.component}
+                  onChange={value => this.updateCode('basic', value)}
+                  options={this.state.basicOptions}
+                />
+              </ContentHolder>
+            </Box>
+          </Col>
+        </Row>
+        <Row style={rowStyle} gutter={gutter} justify="start">
+          <Col md={24} sm={24} xs={24} style={colStyle}>
+            <Box title="Redux Action Example">
+              <ContentHolder>
+                <SampleCodeToolbar className="isoOptionWrapper">
+                  {this.toggleOptions()}
+                  {this.selctOptions()}
+                </SampleCodeToolbar>
+                <SampleCode
+                  value={this.state.redux}
                   onChange={value => this.updateCode('basic', value)}
                   options={this.state.basicOptions}
                 />
