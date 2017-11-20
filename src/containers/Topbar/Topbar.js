@@ -5,8 +5,7 @@ import appActions from '../../redux/app/actions';
 import TopbarWrapper from './topbar.style';
 import {
   TopbarMessage,
-  TopbarSearch,
-  TopbarUser,
+  TopbarSearch
 } from '../../components/topbar';
 
 const { Header } = Layout;

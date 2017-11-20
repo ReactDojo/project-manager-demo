@@ -199,7 +199,7 @@ class Sidebar extends Component {
               </Menu.Item>
 
               <Menu.Item key="api">
-                <a href="http://swagger.reactdojo.com/" target="_blank">
+                <a href="http://swagger.reactdojo.com/">
                   <span className="isoMenuHolder" style={submenuColor}>
                     <i className="ion-leaf" />
                     <span className="nav-text">

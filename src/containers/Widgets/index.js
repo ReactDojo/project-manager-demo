@@ -7,7 +7,6 @@ import IsoWidgetBox from './widget-box';
 import CardWidget from './card/card-widgets';
 import ProgressWidget from './progress/progress-widget';
 import StickerWidget from './sticker/sticker-widget';
-import SaleWidget from './sale/sale-widget';
 import VCardWidget from './vCard/vCard-widget';
 import SocialWidget from './social-widget/social-widget';
 import SocialProfile from './social-widget/social-profile-icon';

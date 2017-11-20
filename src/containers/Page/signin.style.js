@@ -96,10 +96,10 @@ const SignInStyleWrapper = styled.div`
       }
 
       .isoHelperText {
-        font-size: 12px;
+        font-size: 18px;
         font-weight: 400;
         line-height: 1.2;
-        color: ${palette('grayscale', 1)};
+        color: #27323e;
         padding-left: ${props =>
           props['data-rtl'] === 'rtl' ? 'inherit' : '13px'};
         padding-right: ${props =>
@@ -110,7 +110,7 @@ const SignInStyleWrapper = styled.div`
         align-items: center;
 
         &:before {
-          content: '*';
+          content: '';
           color: ${palette('error', 0)};
           padding-right: 3px;
           font-size: 14px;
@@ -130,7 +130,7 @@ const SignInStyleWrapper = styled.div`
       .isoOtherLogin {
         padding-top: 40px;
         margin-top: 35px;
-        border-top: 1px dashed ${palette('grayscale', 2)};
+        border-top: 0px dashed ${palette('grayscale', 2)};
 
         > a {
           display: flex;

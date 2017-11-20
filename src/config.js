@@ -18,15 +18,15 @@ const AlgoliaSearchConfig = {
   apiKey: '',
 };
 const Auth0Config = {
-  domain: '',
-  clientID: '', //
+  domain: 'react-dojo.auth0.com',
+  clientID: 'vkm5g0KKuNMBTe3TJBS16OZqsQPOT7t-', 
   options: {
     auth: {
       autoParseHash: true,
       redirect: false,
     },
     languageDictionary: {
-      title: 'React Dojo Demo',
+      title: 'React Dojo',
       emailInputPlaceholder: 'reactdojodemo@gmail.com',
       passwordInputPlaceholder: 'demodemo',
     },
