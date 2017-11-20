@@ -26,14 +26,14 @@ const Auth0Config = {
       redirect: false,
     },
     languageDictionary: {
-      title: 'React Dojo',
-      emailInputPlaceholder: 'reactdojodemo@gmail.com',
-      passwordInputPlaceholder: 'demodemo',
+      title: '',
+      emailInputPlaceholder: 'demo@demo.com',
+      passwordInputPlaceholder: 'demo',
     },
     icon: '',
     theme: {
       labeledSubmitButton: true,
-      logo: '',
+      logo: 'http://www.reactdojo.com/images/logo-black.png',
       primaryColor: '#E14615',
       authButtons: {
         connectionName: {

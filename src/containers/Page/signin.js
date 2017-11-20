@@ -48,9 +48,15 @@ class SignIn extends Component {
             <div className="isoSignInForm">
 
               <p className="isoHelperText">
-                Welcome to React Dojo !<br />
+                Welcome to the React Dojo Demo!<br />
                 <br />
-                Please login below to proceed
+                <br />
+                Please sign in via Facebook or Google to help us keep track of who has been visiting!<br />
+                <br />
+                If you would like to sign in without using OAuth, please sign in using the following to begin:<br />
+                <br />
+                &nbsp;&nbsp;&nbsp;Email:    demo@demo.com<br />
+                &nbsp;&nbsp;&nbsp;Password: demo
               </p>
 
               <div className="isoInputWrapper isoOtherLogin">

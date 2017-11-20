@@ -128,8 +128,8 @@ const SignInStyleWrapper = styled.div`
       }
 
       .isoOtherLogin {
-        padding-top: 40px;
-        margin-top: 35px;
+        padding-top: 0px;
+        margin-top: 15px;
         border-top: 0px dashed ${palette('grayscale', 2)};
 
         > a {
